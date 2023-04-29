@@ -1,10 +1,8 @@
-import Button from '@/components/ui/Button'
-import { FC } from 'react'
+import { db } from "@/lib/db"
 
-interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
-  return <Button>Hello</Button>
+export default async function Home() {
+  await db.set("hello", "world")
+  
+  return <div className="text-red-500">hello world</div>
 }
-
-export default page
