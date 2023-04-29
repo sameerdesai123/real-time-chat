@@ -14,18 +14,6 @@ function getGoogleCredentials() {
     }
 }
 
-
-function getGithubCredentials() {
-    if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
-        throw new Error("Missing GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET environment variable")
-    }
-
-    return {
-        clientId: process.env.GITHUB_CLIENT_ID as string,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET as string
-    };
-}
-
 export const authOptions: NextAuthOptions = {
     adapter: UpstashRedisAdapter(db),
     session: {
@@ -35,8 +23,7 @@ export const authOptions: NextAuthOptions = {
         signIn: '/login',
     },
     providers: [
-        GoogleProvider(getGoogleCredentials()),
-        GithubProvider(getGithubCredentials())
+        GoogleProvider(getGoogleCredentials())
     ],
     callbacks: {
         async jwt ({token, user}) {
